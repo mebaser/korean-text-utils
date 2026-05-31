@@ -42,6 +42,10 @@ print(compose(["ㅇ", "ㅏ", "ㄴ", "ㄴ", "ㅕ", "ㅇ"]))
 print(romanize("안녕하세요"))
 # 출력: annyeonghaseyo
 
+# 대표 발음 변화 반영
+print(romanize("신라 종로 같이 좋고"))
+# 출력: silla jongno gachi joko
+
 # 텍스트 정리
 print(clean_text("안녕하세요!!!   ^_^  반가워요~~~~"))
 # 출력: 안녕하세요 반가워요
