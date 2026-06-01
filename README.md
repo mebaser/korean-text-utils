@@ -29,6 +29,7 @@ pip install -e ".[dev]"
 from korean_text_utils.hangul import decompose, compose
 from korean_text_utils.romanize import romanize
 from korean_text_utils.normalize import clean_text
+from korean_text_utils.utils import split_sentences, text_length
 
 # 한글 자모 분리
 print(decompose("안녕하세요"))
@@ -49,6 +50,13 @@ print(romanize("신라 종로 같이 좋고"))
 # 텍스트 정리
 print(clean_text("안녕하세요!!!   ^_^  반가워요~~~~"))
 # 출력: 안녕하세요 반가워요
+
+# 문장 분리와 길이 계산
+print(split_sentences("안녕하세요! 반가워요. 잘 지내죠?"))
+# 출력: ['안녕하세요!', '반가워요.', '잘 지내죠?']
+
+print(text_length("안녕 하세요!"))
+# 출력: 6
 ```
 
 ## 상세 문서
@@ -56,6 +64,7 @@ print(clean_text("안녕하세요!!!   ^_^  반가워요~~~~"))
 - 한글 자모 처리: [`src/korean_text_utils/hangul.py`](./src/korean_text_utils/hangul.py)
 - 로마자 변환: [`src/korean_text_utils/romanize.py`](./src/korean_text_utils/romanize.py)
 - 텍스트 정규화: [`src/korean_text_utils/normalize.py`](./src/korean_text_utils/normalize.py)
+- 문장 유틸리티: [`src/korean_text_utils/utils.py`](./src/korean_text_utils/utils.py)
 
 ## 기여 방법
 

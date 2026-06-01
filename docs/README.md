@@ -7,6 +7,12 @@
 - 한글 자모 처리: `src/korean_text_utils/hangul.py`
 - 로마자 변환: `src/korean_text_utils/romanize.py`
 - 텍스트 정규화: `src/korean_text_utils/normalize.py`
+- 문장 유틸리티: `src/korean_text_utils/utils.py`
+
+## 문장 유틸리티
+
+`split_sentences()`는 문장 끝 문장부호를 보존하면서 한국어 문장을 나눕니다.
+`text_length()`는 기본적으로 공백을 제외한 유니코드 문자 수를 반환하고, `include_spaces=True`를 주면 연속 공백을 하나로 정규화한 뒤 공백까지 셉니다.
 
 ## 로마자 변환 범위
 
