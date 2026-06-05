@@ -9,6 +9,14 @@
 - 텍스트 정규화: `src/korean_text_utils/normalize.py`
 - 문장 유틸리티: `src/korean_text_utils/utils.py`
 
+## 한글 자모 처리
+
+`hangul.py`는 완성형 한글 음절뿐 아니라 호환 자모와 현대 자모까지 판별할 수 있습니다.
+
+- `contains_hangul("hello 한글!") -> True`
+- `extract_hangul("ABC 한글 123 ㄱㄴ!") -> "한글ㄱㄴ"`
+- `extract_hangul("ABC 한글 123 ㄱㄴ!", include_jamo=False) -> "한글"`
+
 ## 문장 유틸리티
 
 `split_sentences()`는 문장 끝 문장부호를 보존하면서 한국어 문장을 나눕니다.

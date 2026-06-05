@@ -6,6 +6,14 @@ from collections.abc import Iterable
 
 HANGUL_BASE = 0xAC00
 HANGUL_END = 0xD7A3
+JAMO_BASE = 0x1100
+JAMO_END = 0x11FF
+COMPATIBILITY_JAMO_BASE = 0x3130
+COMPATIBILITY_JAMO_END = 0x318F
+JAMO_EXTENDED_A_BASE = 0xA960
+JAMO_EXTENDED_A_END = 0xA97F
+JAMO_EXTENDED_B_BASE = 0xD7B0
+JAMO_EXTENDED_B_END = 0xD7FF
 JUNGSEONG_COUNT = 21
 JONGSEONG_COUNT = 28
 SYLLABLE_BLOCK_SIZE = JUNGSEONG_COUNT * JONGSEONG_COUNT
@@ -96,6 +104,42 @@ def is_hangul_syllable(char: str) -> bool:
     """Return True when char is one precomposed Hangul syllable."""
 
     return len(char) == 1 and HANGUL_BASE <= ord(char) <= HANGUL_END
+
+
+def is_hangul_jamo(char: str) -> bool:
+    """Return True when char is one Hangul jamo character."""
+
+    if len(char) != 1:
+        return False
+
+    codepoint = ord(char)
+    return (
+        JAMO_BASE <= codepoint <= JAMO_END
+        or COMPATIBILITY_JAMO_BASE <= codepoint <= COMPATIBILITY_JAMO_END
+        or JAMO_EXTENDED_A_BASE <= codepoint <= JAMO_EXTENDED_A_END
+        or JAMO_EXTENDED_B_BASE <= codepoint <= JAMO_EXTENDED_B_END
+    )
+
+
+def is_hangul_char(char: str) -> bool:
+    """Return True when char is a Hangul syllable or jamo."""
+
+    return is_hangul_syllable(char) or is_hangul_jamo(char)
+
+
+def contains_hangul(text: str) -> bool:
+    """Return True when text contains at least one Hangul character."""
+
+    return any(is_hangul_char(char) for char in text)
+
+
+def extract_hangul(text: str, *, include_jamo: bool = True) -> str:
+    """Return only Hangul characters from text."""
+
+    if include_jamo:
+        return "".join(char for char in text if is_hangul_char(char))
+
+    return "".join(char for char in text if is_hangul_syllable(char))
 
 
 def decompose(text: str) -> list[str]:

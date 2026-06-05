@@ -26,7 +26,12 @@ pip install -e ".[dev]"
 ## 사용 예시
 
 ```python
-from korean_text_utils.hangul import decompose, compose
+from korean_text_utils.hangul import (
+    compose,
+    contains_hangul,
+    decompose,
+    extract_hangul,
+)
 from korean_text_utils.romanize import romanize
 from korean_text_utils.normalize import clean_text
 from korean_text_utils.utils import split_sentences, text_length
@@ -38,6 +43,13 @@ print(decompose("안녕하세요"))
 # 한글 자모 조합
 print(compose(["ㅇ", "ㅏ", "ㄴ", "ㄴ", "ㅕ", "ㅇ"]))
 # 출력: 안녕
+
+# 한글 포함 여부와 추출
+print(contains_hangul("hello 한글!"))
+# 출력: True
+
+print(extract_hangul("ABC 한글 123 ㄱㄴ!"))
+# 출력: 한글ㄱㄴ
 
 # 로마자 변환
 print(romanize("안녕하세요"))

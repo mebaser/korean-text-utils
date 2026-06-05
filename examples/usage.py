@@ -4,7 +4,12 @@ import sys
 # Allow running this file directly from a fresh clone.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from korean_text_utils.hangul import compose, decompose
+from korean_text_utils.hangul import (
+    compose,
+    contains_hangul,
+    decompose,
+    extract_hangul,
+)
 from korean_text_utils.normalize import clean_text
 from korean_text_utils.romanize import romanize
 from korean_text_utils.utils import split_sentences, text_length
@@ -13,6 +18,8 @@ from korean_text_utils.utils import split_sentences, text_length
 def main() -> None:
     print(decompose("안녕하세요"))
     print(compose(["ㅇ", "ㅏ", "ㄴ", "ㄴ", "ㅕ", "ㅇ"]))
+    print(contains_hangul("hello 한글!"))
+    print(extract_hangul("ABC 한글 123 ㄱㄴ!"))
     print(romanize("안녕하세요"))
     print(clean_text("안녕하세요!!!   ^_^  반가워요~~~~"))
     print(split_sentences("안녕하세요! 반가워요. 잘 지내죠?"))
