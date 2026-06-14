@@ -16,6 +16,8 @@
 - `contains_hangul("hello 한글!") -> True`
 - `extract_hangul("ABC 한글 123 ㄱㄴ!") -> "한글ㄱㄴ"`
 - `extract_hangul("ABC 한글 123 ㄱㄴ!", include_jamo=False) -> "한글"`
+- `extract_initials("한글 테스트") -> "ㅎㄱㅌㅅㅌ"`
+- `has_batchim("강") -> True`
 
 ## 문장 유틸리티
 

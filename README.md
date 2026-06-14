@@ -31,6 +31,8 @@ from korean_text_utils.hangul import (
     contains_hangul,
     decompose,
     extract_hangul,
+    extract_initials,
+    has_batchim,
 )
 from korean_text_utils.romanize import romanize
 from korean_text_utils.normalize import clean_text
@@ -50,6 +52,12 @@ print(contains_hangul("hello 한글!"))
 
 print(extract_hangul("ABC 한글 123 ㄱㄴ!"))
 # 출력: 한글ㄱㄴ
+
+print(extract_initials("한글 테스트"))
+# 출력: ㅎㄱㅌㅅㅌ
+
+print(has_batchim("강"))
+# 출력: True
 
 # 로마자 변환
 print(romanize("안녕하세요"))

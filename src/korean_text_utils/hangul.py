@@ -142,6 +142,27 @@ def extract_hangul(text: str, *, include_jamo: bool = True) -> str:
     return "".join(char for char in text if is_hangul_syllable(char))
 
 
+def has_batchim(char: str) -> bool:
+    """Return True when char is a Hangul syllable with a final consonant."""
+
+    return is_hangul_syllable(char) and (ord(char) - HANGUL_BASE) % JONGSEONG_COUNT > 0
+
+
+def extract_initials(text: str, *, include_non_hangul: bool = False) -> str:
+    """Extract choseong initials from Hangul syllables in text."""
+
+    result: list[str] = []
+
+    for char in text:
+        if is_hangul_syllable(char):
+            offset = ord(char) - HANGUL_BASE
+            result.append(CHOSEONG[offset // SYLLABLE_BLOCK_SIZE])
+        elif include_non_hangul:
+            result.append(char)
+
+    return "".join(result)
+
+
 def decompose(text: str) -> list[str]:
     """Split Hangul syllables into compatibility jamo.
 

@@ -3,6 +3,8 @@ from korean_text_utils.hangul import (
     contains_hangul,
     decompose,
     extract_hangul,
+    extract_initials,
+    has_batchim,
     is_hangul_char,
     is_hangul_jamo,
     is_hangul_syllable,
@@ -61,3 +63,23 @@ def test_extract_hangul_keeps_only_hangul_characters():
 
 def test_extract_hangul_can_exclude_jamo():
     assert extract_hangul("ABC 한글 123 ㄱㄴ!", include_jamo=False) == "한글"
+
+
+def test_has_batchim_detects_final_consonants_in_hangul_syllables():
+    assert has_batchim("강") is True
+    assert has_batchim("가") is False
+    assert has_batchim("ㄱ") is False
+    assert has_batchim("A") is False
+
+
+def test_extract_initials_returns_choseong_for_hangul_syllables():
+    assert extract_initials("안녕하세요") == "ㅇㄴㅎㅅㅇ"
+    assert extract_initials("한글 테스트") == "ㅎㄱㅌㅅㅌ"
+
+
+def test_extract_initials_skips_non_hangul_by_default():
+    assert extract_initials("K-한글!") == "ㅎㄱ"
+
+
+def test_extract_initials_can_preserve_non_hangul_characters():
+    assert extract_initials("K-한글!", include_non_hangul=True) == "K-ㅎㄱ!"
